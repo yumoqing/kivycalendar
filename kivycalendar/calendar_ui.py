@@ -21,6 +21,7 @@ from kivy.uix.label import Label
 from kivy.core.window import Window
 from kivy.factory import Factory
 from kivy.properties import NumericProperty, ReferenceListProperty
+from kivyblocks.i18n import I18n
 
 from . import calendar_data as cal_data
 ###########################################################
@@ -125,6 +126,7 @@ class CalendarWidget(RelativeLayout):
 	def __init__(self, as_popup=False, touch_switch=False, *args, **kwargs):
 		super(CalendarWidget, self).__init__(*args, **kwargs)
 		
+		self.i18n = I18n()
 		self.as_popup = as_popup
 		self.touch_switch = touch_switch
 		self.prepare_data()	 
@@ -206,7 +208,7 @@ class CalendarWidget(RelativeLayout):
 		# Today date
 		self.active_date = cal_data.today_date_list()
 		# Set title
-		self.title = "%s - %s" % (self.month_names[self.active_date[1] - 1], 
+		self.title = "%s - %s" % (self.i18n(self.month_names[self.active_date[1] - 1]), 
 								  self.active_date[2])
 				
 		# Quarter where current month in the self.quarter[1]
@@ -248,7 +250,7 @@ class CalendarWidget(RelativeLayout):
 		self.sm.transition.direction = "right"
 		
 		self.get_quarter()
-		self.title = "%s - %s" % (self.month_names[self.active_date[1] - 1], 
+		self.title = "%s - %s" % (self.i18n(self.month_names[self.active_date[1] - 1]), 
 								  self.active_date[2])
 		
 		self.title_label.text = self.title
@@ -273,7 +275,7 @@ class CalendarWidget(RelativeLayout):
 		self.sm.transition.direction = "left"
 		
 		self.get_quarter()
-		self.title = "%s - %s" % (self.month_names[self.active_date[1] - 1], 
+		self.title = "%s - %s" % (self.i18n(self.month_names[self.active_date[1] - 1]), 
 								  self.active_date[2])
 		
 		self.title_label.text = self.title
